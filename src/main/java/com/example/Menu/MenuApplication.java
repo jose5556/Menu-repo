@@ -1,5 +1,6 @@
 package com.example.Menu;
 
+import com.example.Menu.controller.FoodController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,6 +9,6 @@ public class MenuApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MenuApplication.class, args);
-		System.out.println("hello world");
+
 	}
 }

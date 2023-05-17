@@ -2,10 +2,10 @@ package com.example.Menu.controller;
 
 import com.example.Menu.Food.Food;
 import com.example.Menu.Food.FoodRepository;
+import com.example.Menu.Food.FoodRequestDTO;
+import com.example.Menu.Food.FoodResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,10 +14,20 @@ import java.util.List;
 public class FoodController {
     @Autowired
     private FoodRepository repository;
-@GetMapping
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @PostMapping
+    public void saveFood(@RequestBody FoodRequestDTO data) {
+        Food foodData = new Food(data);
+        repository.save(foodData);
+        return;
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @GetMapping
     public List<FoodResponseDTO> getAll() {
 
-    List<Food> foodList = repository.findAll();
-    return foodList;
+        List<FoodResponseDTO> foodList = repository.findAll().stream().map(FoodResponseDTO::new).toList();
+        return foodList;
     }
 }
